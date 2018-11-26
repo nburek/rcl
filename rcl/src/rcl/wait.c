@@ -198,11 +198,7 @@ rcl_wait_set_get_allocator(const rcl_wait_set_t * wait_set, rcl_allocator_t * al
     return RCL_RET_WAIT_SET_FULL; \
   } \
   size_t current_index = wait_set->impl->Type ## _index++; \
-  wait_set->Type ## s[current_index] = Type; \
-  /* Set optional output argument */ \
-  if (NULL != index) { \
-    *index = current_index; \
-  }
+  wait_set->Type ## s[current_index] = Type;
 
 #define SET_ADD_RMW(Type, RMWStorage, RMWCount) \
   /* Also place into rmw storage. */ \
@@ -287,8 +283,7 @@ rcl_wait_set_get_allocator(const rcl_wait_set_t * wait_set, rcl_allocator_t * al
 rcl_ret_t
 rcl_wait_set_add_subscription(
   rcl_wait_set_t * wait_set,
-  const rcl_subscription_t * subscription,
-  size_t * index)
+  const rcl_subscription_t * subscription)
 {
   SET_ADD(subscription)
   SET_ADD_RMW(subscription, rmw_subscriptions.subscribers, rmw_subscriptions.subscriber_count)
@@ -407,21 +402,18 @@ rcl_wait_set_resize(
 rcl_ret_t
 rcl_wait_set_add_guard_condition(
   rcl_wait_set_t * wait_set,
-  const rcl_guard_condition_t * guard_condition,
-  size_t * index)
+  const rcl_guard_condition_t * guard_condition)
 {
   SET_ADD(guard_condition)
   SET_ADD_RMW(guard_condition, rmw_guard_conditions.guard_conditions,
     rmw_guard_conditions.guard_condition_count)
-
   return RCL_RET_OK;
 }
 
 rcl_ret_t
 rcl_wait_set_add_timer(
   rcl_wait_set_t * wait_set,
-  const rcl_timer_t * timer,
-  size_t * index)
+  const rcl_timer_t * timer)
 {
   SET_ADD(timer)
   // Add timer guard conditions to end of rmw guard condtion set.
@@ -440,8 +432,7 @@ rcl_wait_set_add_timer(
 rcl_ret_t
 rcl_wait_set_add_client(
   rcl_wait_set_t * wait_set,
-  const rcl_client_t * client,
-  size_t * index)
+  const rcl_client_t * client)
 {
   SET_ADD(client)
   SET_ADD_RMW(client, rmw_clients.clients, rmw_clients.client_count)
@@ -451,8 +442,7 @@ rcl_wait_set_add_client(
 rcl_ret_t
 rcl_wait_set_add_service(
   rcl_wait_set_t * wait_set,
-  const rcl_service_t * service,
-  size_t * index)
+  const rcl_service_t * service)
 {
   SET_ADD(service)
   SET_ADD_RMW(service, rmw_services.services, rmw_services.service_count)

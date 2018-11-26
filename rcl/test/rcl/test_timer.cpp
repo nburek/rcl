@@ -71,9 +71,9 @@ TEST_F(TestTimerFixture, test_two_timers) {
   ret = rcl_wait_set_init(&wait_set, 0, 0, 2, 0, 0, rcl_get_default_allocator());
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
-  ret = rcl_wait_set_add_timer(&wait_set, &timer, NULL);
+  ret = rcl_wait_set_add_timer(&wait_set, &timer);
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
-  ret = rcl_wait_set_add_timer(&wait_set, &timer2, NULL);
+  ret = rcl_wait_set_add_timer(&wait_set, &timer2);
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
   OSRF_TESTING_TOOLS_CPP_SCOPE_EXIT({
     rcl_ret_t ret = rcl_timer_fini(&timer);
@@ -125,9 +125,9 @@ TEST_F(TestTimerFixture, test_two_timers_ready_before_timeout) {
   ret = rcl_wait_set_init(&wait_set, 0, 0, 2, 0, 0, rcl_get_default_allocator());
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
-  ret = rcl_wait_set_add_timer(&wait_set, &timer, NULL);
+  ret = rcl_wait_set_add_timer(&wait_set, &timer);
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
-  ret = rcl_wait_set_add_timer(&wait_set, &timer2, NULL);
+  ret = rcl_wait_set_add_timer(&wait_set, &timer2);
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
   OSRF_TESTING_TOOLS_CPP_SCOPE_EXIT({
     rcl_ret_t ret = rcl_timer_fini(&timer);
@@ -175,7 +175,7 @@ TEST_F(TestTimerFixture, test_timer_not_ready) {
   ret = rcl_wait_set_init(&wait_set, 0, 0, 1, 0, 0, rcl_get_default_allocator());
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
-  ret = rcl_wait_set_add_timer(&wait_set, &timer, NULL);
+  ret = rcl_wait_set_add_timer(&wait_set, &timer);
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
   OSRF_TESTING_TOOLS_CPP_SCOPE_EXIT({
@@ -222,7 +222,7 @@ TEST_F(TestTimerFixture, test_canceled_timer) {
   ret = rcl_wait_set_init(&wait_set, 0, 0, 1, 0, 0, rcl_get_default_allocator());
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
-  ret = rcl_wait_set_add_timer(&wait_set, &timer, NULL);
+  ret = rcl_wait_set_add_timer(&wait_set, &timer);
   EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
   OSRF_TESTING_TOOLS_CPP_SCOPE_EXIT({
@@ -437,7 +437,7 @@ TEST_F(TestTimerFixture, test_ros_time_wakes_wait) {
       ret = rcl_wait_set_init(&wait_set, 0, 0, 1, 0, 0, rcl_get_default_allocator());
       EXPECT_EQ(RCL_RET_OK, ret) << rcl_get_error_string().str;
 
-      ASSERT_EQ(RCL_RET_OK, rcl_wait_set_add_timer(&wait_set, &timer, NULL)) <<
+      ASSERT_EQ(RCL_RET_OK, rcl_wait_set_add_timer(&wait_set, &timer)) <<
         rcl_get_error_string().str;
       // *INDENT-OFF* (Uncrustify wants strange un-indentation here)
       OSRF_TESTING_TOOLS_CPP_SCOPE_EXIT({
