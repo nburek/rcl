@@ -53,11 +53,11 @@ add_library(${PROJECT_NAME}
 )
 
 ament_target_dependencies(${PROJECT_NAME}
-  "action_msgs"
-  "rcl"
-  "rcutils"
-  "rmw"
   "rosidl_generator_c"
+  "action_msgs"
+  "rmw"
+  "rcutils"
+  "rcl"
 )
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
@@ -75,6 +75,7 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
+  find_package(test_msgs REQUIRED)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(ament_lint_auto REQUIRED)
   find_package(test_msgs REQUIRED)
@@ -100,6 +101,7 @@ if(BUILD_TESTING)
     target_include_directories(test_action_communication PUBLIC
       include
       ${rcl_INCLUDE_DIRS}
+      ${test_msgs_INCLUDE_DIRS}
     )
     target_link_libraries(test_action_communication
       ${PROJECT_NAME}
@@ -113,6 +115,7 @@ if(BUILD_TESTING)
     target_include_directories(test_action_server PUBLIC
       include
       ${rcl_INCLUDE_DIRS}
+      ${test_msgs_INCLUDE_DIRS}
     )
     target_link_libraries(test_action_server
       ${PROJECT_NAME}
