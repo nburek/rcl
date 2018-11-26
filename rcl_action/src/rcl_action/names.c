@@ -34,7 +34,7 @@ rcl_action_get_goal_service_name(
   RCL_CHECK_ARGUMENT_FOR_NULL(action_name, RCL_RET_INVALID_ARGUMENT);
   if (0 == strlen(action_name)) {
     RCL_SET_ERROR_MSG("invalid empty action name");
-    return RCL_RET_ACTION_NAME_INVALID;
+    return RCL_RET_INVALID_ARGUMENT;
   }
   RCL_CHECK_ARGUMENT_FOR_NULL(goal_service_name, RCL_RET_INVALID_ARGUMENT);
   if (NULL != *goal_service_name) {
@@ -57,9 +57,10 @@ rcl_action_get_cancel_service_name(
 {
   RCL_CHECK_ALLOCATOR_WITH_MSG(&allocator, "allocator is invalid", return RCL_RET_INVALID_ARGUMENT);
   RCL_CHECK_ARGUMENT_FOR_NULL(action_name, RCL_RET_INVALID_ARGUMENT);
+  RCL_CHECK_ARGUMENT_FOR_NULL(action_name, RCL_RET_INVALID_ARGUMENT);
   if (0 == strlen(action_name)) {
     RCL_SET_ERROR_MSG("invalid empty action name");
-    return RCL_RET_ACTION_NAME_INVALID;
+    return RCL_RET_INVALID_ARGUMENT;
   }
   RCL_CHECK_ARGUMENT_FOR_NULL(cancel_service_name, RCL_RET_INVALID_ARGUMENT);
   if (NULL != *cancel_service_name) {
@@ -84,7 +85,7 @@ rcl_action_get_result_service_name(
   RCL_CHECK_ARGUMENT_FOR_NULL(action_name, RCL_RET_INVALID_ARGUMENT);
   if (0 == strlen(action_name)) {
     RCL_SET_ERROR_MSG("invalid empty action name");
-    return RCL_RET_ACTION_NAME_INVALID;
+    return RCL_RET_INVALID_ARGUMENT;
   }
   RCL_CHECK_ARGUMENT_FOR_NULL(result_service_name, RCL_RET_INVALID_ARGUMENT);
   if (NULL != *result_service_name) {
@@ -109,7 +110,7 @@ rcl_action_get_feedback_topic_name(
   RCL_CHECK_ARGUMENT_FOR_NULL(action_name, RCL_RET_INVALID_ARGUMENT);
   if (0 == strlen(action_name)) {
     RCL_SET_ERROR_MSG("invalid empty action name");
-    return RCL_RET_ACTION_NAME_INVALID;
+    return RCL_RET_INVALID_ARGUMENT;
   }
   RCL_CHECK_ARGUMENT_FOR_NULL(feedback_topic_name, RCL_RET_INVALID_ARGUMENT);
   if (NULL != *feedback_topic_name) {
@@ -134,7 +135,7 @@ rcl_action_get_status_topic_name(
   RCL_CHECK_ARGUMENT_FOR_NULL(action_name, RCL_RET_INVALID_ARGUMENT);
   if (0 == strlen(action_name)) {
     RCL_SET_ERROR_MSG("invalid empty action name");
-    return RCL_RET_ACTION_NAME_INVALID;
+    return RCL_RET_INVALID_ARGUMENT;
   }
   RCL_CHECK_ARGUMENT_FOR_NULL(status_topic_name, RCL_RET_INVALID_ARGUMENT);
   if (NULL != *status_topic_name) {
